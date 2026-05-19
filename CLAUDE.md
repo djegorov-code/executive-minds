@@ -1,5 +1,11 @@
 # CLAUDE.md — Executive Minds
 
+## Документация
+
+- **[WORKLOG.md](WORKLOG.md)** — лог всех изменений (что на что поменяли) + known «to be» настройки
+
+---
+
 ## Что это
 
 Лендинг образовательной платформы **Executive Minds** для сертифицированных практиков Hogan Assessment.
