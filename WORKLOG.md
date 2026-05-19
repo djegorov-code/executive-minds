@@ -59,15 +59,62 @@
 
 ## To Be — известные настройки, ещё не внедрённые
 
-### Из анализа Wispr Flow
-Источник: `/Users/yegorovandrei/claude/mini/style_catch/wisperflow_catalog_v5.html`
+### Из анализа Wispr Flow CSS
+Источник: `https://cdn.prod.website-files.com/682f84b3838c89f8ff7667db/css/flowsite-dev.webflow.shared.17b04da35.min.css`
 
-| Параметр | Wispr Flow | У нас сейчас | Статус |
-|----------|-----------|--------------|--------|
-| Основной акцент | `#FF6C4C` (coral) | `--amber-soft: #C9A065` | ❓ обсудить |
-| Семантические токены цвета | `text-color-primary/secondary/tertiary` | Нет, только `--ink/--ink-soft` | ❓ |
-| Spacer-система | `spacer-xxsmall` … `spacer-xxlarge` | `clamp()` напрямую | ❓ |
-| Кнопки размеры | `is-small`, `is-medium-small` | `btn--sm` | ❓ |
+#### Заголовки
+
+| Параметр | Wispr Flow | У нас сейчас | ✅/❌ |
+|----------|-----------|--------------|------|
+| h1 font-size | `7.5rem` | `clamp(2.4rem, 5.8vw, 4.6rem)` | ❌ значительно меньше |
+| h1 font-weight | `400` | `400` | ✅ |
+| h1 line-height | `0.85` | `0.88` | ≈ близко |
+| h1 letter-spacing | `-0.05em` | `-0.05em` | ✅ |
+| h2 font-size | `4rem` | `clamp(1.8rem, 3.6vw, 2.9rem)` | ❌ наш max меньше |
+| h2 line-height | `0.95` | `0.95` | ✅ |
+| h2 letter-spacing | `-0.03em` | `-0.03em` | ✅ |
+| h3 font-size | `3rem` | `clamp(1.25rem, 2vw, 1.55rem)` | ❌ сильно меньше |
+| h3 line-height | `1.1` | `1.1` | ✅ |
+| h4 font-size | `2rem` | `1.05rem` | ❌ вдвое меньше |
+| h4 line-height | `1.3` | `1.2` | ≈ |
+| h4 letter-spacing | `-0.03em` | `-0.01em` | ❌ |
+
+#### Цвета
+
+| Параметр | Wispr Flow | У нас сейчас | ✅/❌ |
+|----------|-----------|--------------|------|
+| Фон страницы (cream) | `#ffffeb` | `#F4EFE3` | ❌ разные оттенки |
+| Тёмный фон | `#1a1a1a` | `#0C1F1A` | ❌ |
+| Текст primary | `#1a1a1a` | `#16201B` | ≈ |
+| Акцент (glow/amber) | `#ffa946` | `#C9A065` | ❌ |
+| Акцент 2 (dawn) | `#f0d7ff` (лавандовый) | нет | ❌ |
+| Зелёный акцент | `#034f46` | `#3B5A45` (`--moss`) | ≈ |
+
+#### Кнопки
+
+| Параметр | Wispr Flow | У нас сейчас | ✅/❌ |
+|----------|-----------|--------------|------|
+| border-radius | `0.75rem` | `999px` (pill) | ❌ |
+| padding default | `1rem 1.5rem` | `0.9rem 1.4rem` | ≈ |
+| padding large | `1rem 2rem` | нет варианта | ❌ |
+| font-weight | `600` | `500` | ❌ |
+| line-height | `1` | не задан | ❌ |
+
+#### Секции и отступы
+
+| Параметр | Wispr Flow | У нас сейчас | ✅/❌ |
+|----------|-----------|--------------|------|
+| Section padding large | `8rem` | `clamp(3.5rem, 7vw, 6rem)` | ❌ меньше |
+| Section padding medium | `6rem` | `clamp(2.5rem, 5vw, 4rem)` | ❌ |
+| Section border-radius | `2.5rem / 4rem / 5rem` | нет | ❌ |
+| Container max-width | `77.5rem` (1240px) | `1240px` | ✅ |
+
+#### Шрифты (подтверждено)
+| | Wispr Flow | У нас | ✅/❌ |
+|-|-----------|-------|------|
+| Serif | `"Eb garamond"` | `'EB Garamond'` | ✅ |
+| Sans | `Figtree` | `Figtree` | ✅ |
+| Mono | `Monaspace Neon` / `IBM Plex Mono` | `JetBrains Mono` | ❌ (не критично) |
 
 ### Технические
 | Задача | Статус |
