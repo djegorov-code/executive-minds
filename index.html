@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Глубинная интерпретация профилей Hogan — Executive Minds</title>
+<meta name="description" content="Программа Глубинной интерпретации профилей Hogan для сертифицированных практиков. Малая группа, реальные кейсы, встреча-знакомство 30 мая, старт — 13 или 20 июня.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C1F1A'/%3E%3Ctext x='50%25' y='62%25' text-anchor='middle' font-family='Georgia' fill='%23C9A065' font-size='22'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+  /* ---------- HERO V2 — full bleed, viewport height ---------- */
+  .hero-v2 {
+    position: relative; color: var(--cream); overflow: hidden;
+    display: flex; flex-direction: column;
+    height: calc(100vh - 52px); min-height: 560px;
+  }
+  .hero-v2-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center center; z-index: 0;
+  }
+
+  .hero-v2-body {
+    position: relative; z-index: 2; flex: 1;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: clamp(4rem, 8vh, 7rem) var(--pad);
+  }
+  .hero-v2-h1 {
+    font-family: var(--serif); font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; color: var(--cream);
+    text-shadow: 0 2px 30px rgba(0,0,0,0.4); margin-bottom: 1.25rem;
+  }
+  .hero-v2-sub {
+    font-size: 1rem; line-height: 1.6; color: rgba(244,239,227,0.80);
+    max-width: 44ch; margin-bottom: 2.25rem;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.3);
+  }
+  .hero-v2-cta-row { display: flex; justify-content: center; }
+  .btn--muted {
+    background: rgba(100, 82, 128, 0.82);
+    color: rgba(244,239,227,0.95);
+    border-color: transparent;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    font-size: 1rem; padding: 0.85rem 2rem;
+  }
+  .btn--muted:hover { background: rgba(120, 100, 150, 0.92); }
+
+  /* ---------- VALUE SECTION ---------- */
+  .value-grid { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  .value-grid h2 { max-width: 14ch; }
+  .value-body p { font-size: 1.06rem; line-height: 1.65; margin-bottom: 1.1rem; color: var(--ink-soft); }
+  .value-body .pull { font-family: var(--serif); font-style: italic; font-size: 1.4rem; line-height: 1.4; color: var(--ink); border-left: 2px solid var(--moss); padding-left: 1.25rem; margin: 2rem 0; max-width: 36ch; }
+  .pending-note { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); border: 1px dashed var(--line-strong); padding: 0.5rem 0.85rem; margin-top: 1rem; }
+  .pending-note::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+  @media (max-width: 800px) { .value-grid { grid-template-columns: 1fr; } }
+
+  /* ICP */
+  .icp { background: var(--cream-soft); border-block: 1px solid var(--line); }
+  .icp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .icp-col { padding: 2.25rem clamp(1.25rem, 2.5vw, 2.25rem); border-left: 1px solid var(--line-soft); }
+  .icp-col:first-child { border-left: 0; }
+  .icp-col h3 { font-size: 1.1rem; font-family: var(--serif); margin-bottom: 1rem; }
+  .icp-col ul { list-style: none; }
+  .icp-col ul li { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; padding: 0.6rem 0; border-bottom: 1px solid var(--line-soft); }
+  .icp-col ul li:last-child { border-bottom: 0; }
+  .icp-col .lead-small { font-size: 0.92rem; color: var(--ink-mute); margin-bottom: 0.9rem; }
+  @media (max-width: 800px) { .icp-grid { grid-template-columns: 1fr; } .icp-col { border-left: 0; border-top: 1px solid var(--line-soft); } .icp-col:first-child { border-top: 0; } }
+
+  /* Results placeholder grid */
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); border-block: 1px solid var(--line); }
+  .results-grid .r {
+    background: var(--cream);
+    padding: 2rem 1.6rem;
+    min-height: 200px;
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .results-grid .r .num { font-family: var(--serif); font-size: 1.25rem; color: var(--moss); font-style: italic; }
+  .results-grid .r h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 460; }
+  .results-grid .r p { font-size: 0.9rem; color: var(--ink-mute); }
+  @media (max-width: 900px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .results-grid { grid-template-columns: 1fr; } }
+
+  /* Modules placeholder */
+  .modules-list { border-top: 1px solid var(--line); }
+  .module {
+    border-bottom: 1px solid var(--line);
+    padding: 1.6rem 0;
+    display: grid;
+    grid-template-columns: 60px 1fr 1.4fr 130px;
+    gap: clamp(1rem, 2vw, 2rem);
+    align-items: baseline;
+  }
+  .module .m-num { font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--moss); }
+  .module .m-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 420; line-height: 1.2; }
+  .module .m-desc { font-size: 0.95rem; color: var(--ink-mute); line-height: 1.55; }
+  .module .m-tag { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); justify-self: end; }
+  @media (max-width: 900px) {
+    .module { grid-template-columns: 36px 1fr; }
+    .module .m-desc, .module .m-tag { grid-column: 2; }
+    .module .m-tag { justify-self: start; padding-top: 0.4rem; }
+  }
+
+  /* Format steps */
+  .format-section { background: var(--forest); color: var(--cream); }
+  .format-section .eyebrow { color: var(--amber-soft); }
+  .format-section h2 { color: var(--cream); }
+  .format-section .lead { color: rgba(244,239,227,0.78); max-width: 62ch; }
+  .format-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); margin-top: 2.5rem; border: 1px solid rgba(255,255,255,0.08); }
+  .format-steps .step { background: var(--forest); padding: 1.6rem; }
+  .format-steps .step .n { font-family: var(--serif); font-style: italic; color: var(--amber-soft); font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .format-steps .step h4 { color: var(--cream); font-family: var(--serif); font-size: 1.1rem; font-weight: 440; margin-bottom: 0.5rem; }
+  .format-steps .step p { color: rgba(244,239,227,0.72); font-size: 0.9rem; line-height: 1.55; }
+  .format-facts-row { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  .format-facts-row span { font-size: 0.82rem; color: rgba(244,239,227,0.7); display: inline-flex; gap: 0.5rem; align-items: center; }
+  .format-facts-row span::before { content:'·'; color: var(--amber-soft); }
+  @media (max-width: 900px) { .format-steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .format-steps { grid-template-columns: 1fr; } }
+
+  /* Cases */
+  .cases-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--line); }
+  .case-item { padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); }
+  .case-item:nth-child(2n) { border-right: 0; }
+  .case-item .case-num { font-family: var(--serif); font-style: italic; color: var(--moss); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .case-item h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 440; line-height: 1.3; margin-bottom: 0.45rem; }
+  .case-item p { font-size: 0.92rem; color: var(--ink-mute); }
+  @media (max-width: 700px) { .cases-list { grid-template-columns: 1fr; } .case-item { border-right: 0; } }
+
+  /* About host */
+  .host {
+    display: grid; grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 4vw, 4rem); align-items: start;
+  }
+  .host-card {
+    background: var(--paper); border: 1px solid var(--line-soft);
+    padding: 1.75rem;
+  }
+  .host-card h3 { font-family: var(--serif); font-size: 1.65rem; font-weight: 420; margin-bottom: 0.2rem; }
+  .host-card .role { font-size: 0.85rem; color: var(--ink-mute); margin-bottom: 1.25rem; }
+  .host-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .host-card ul li { font-size: 0.9rem; color: var(--ink-soft); padding: 0.55rem 0; border-top: 1px solid var(--line-soft); }
+  .host-body p { font-size: 1.02rem; line-height: 1.65; margin-bottom: 1.1rem; color: var(--ink-soft); }
+  @media (max-width: 800px) { .host { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  details.faq-item { border-bottom: 1px solid var(--line); padding: 1.25rem 0; }
+  details.faq-item summary {
+    cursor: pointer; font-family: var(--serif); font-size: 1.15rem; font-weight: 440; color: var(--ink);
+    list-style: none; display: flex; gap: 1rem; justify-content: space-between; align-items: center;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after { content: '+'; font-family: var(--sans); font-weight: 300; font-size: 1.5rem; color: var(--ink-mute); transition: transform .2s var(--ease); line-height: 1; }
+  details.faq-item[open] summary::after { content: '–'; }
+  details.faq-item p { margin-top: 0.85rem; color: var(--ink-soft); font-size: 0.96rem; line-height: 1.6; max-width: 64ch; }
+
+  /* Final CTA dark */
+  .final-cta {
+    background: var(--forest);
+    color: var(--cream);
+    padding: clamp(4rem, 8vw, 7rem) 0;
+  }
+  .final-cta-grid {
+    max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad);
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: end;
+  }
+  .final-cta h2 { color: var(--cream); font-size: clamp(2.2rem, 4.5vw, 3.5rem); max-width: 18ch; }
+  .final-cta h2 em { color: var(--amber-soft); font-style: italic; font-weight: 380; }
+  .final-cta p { color: rgba(244,239,227,0.72); max-width: 48ch; }
+  .final-cta .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.75rem; }
+  @media (max-width: 800px) { .final-cta-grid { grid-template-columns: 1fr; } }
+
+  /* Trust strip */
+  .trust { background: var(--cream-deep); padding: 2rem 0; border-block: 1px solid var(--line); }
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; align-items: baseline; }
+  .trust-grid .t { display: flex; flex-direction: column; gap: 0.25rem; }
+  .trust-grid .t .num { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1; }
+  .trust-grid .t .lab { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+  @media (max-width: 700px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav" aria-label="Главная навигация">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="dot" aria-hidden="true"></span>Executive Minds</a>
+    <ul class="nav-list" id="navList">
+      <li><a href="index.html" class="is-active">Ближайший курс</a></li>
+      <li><a href="space.html">О пространстве</a></li>
+      <li><a href="programs.html">Все программы</a></li>
+      <li><a href="signup.html">Запись</a></li>
+      <li class="nav-cta"><a href="signup.html" class="btn btn--sm btn--cream">Записаться <span class="arr">→</span></a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- =================== HERO V2 =================== -->
+<section class="hero-v2" aria-labelledby="hero-title">
+  <img src="assets/img/фон руки комп апельсин.avif" alt="" class="hero-v2-img" loading="eager" fetchpriority="high">
+  <div class="hero-v2-body">
+    <h1 id="hero-title" class="hero-v2-h1">Инструменты<br>глубинного анализа<br>Hogan</h1>
+    <p class="hero-v2-sub">Практический курс для специалистов, которые уже работают с Hogan и хотят выйти за пределы шкал.</p>
+    <div class="hero-v2-cta-row">
+      <a href="signup.html?context=group" class="btn btn--outline-light">Записаться в группу</a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== HOGAN MARQUEE =================== -->
+<section class="hogan-marquee" aria-hidden="true">
+  <div>
+    <div class="marquee-row">
+      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
+      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
+      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
+    </div>
+    <div class="marquee-row marquee-row--rev marquee-row--slow">
+      <span class="pill pill--hds">EXC</span><span class="pill pill--hds">SKE</span><span class="pill pill--hds">CAU</span><span class="pill pill--hds">RES</span><span class="pill pill--hds">LEI</span><span class="pill pill--hds">BOL</span><span class="pill pill--hds">MIS</span><span class="pill pill--hds">COL</span><span class="pill pill--hds">IMG</span><span class="pill pill--hds">DIL</span><span class="pill pill--hds">DUT</span>
+      <span class="pill pill--hds">EXC</span><span class="pill pill--hds">SKE</span><span class="pill pill--hds">CAU</span><span class="pill pill--hds">RES</span><span class="pill pill--hds">LEI</span><span class="pill pill--hds">BOL</span><span class="pill pill--hds">MIS</span><span class="pill pill--hds">COL</span><span class="pill pill--hds">IMG</span><span class="pill pill--hds">DIL</span><span class="pill pill--hds">DUT</span>
+    </div>
+    <div class="marquee-row">
+      <span class="pill pill--mvpi">REC</span><span class="pill pill--mvpi">POW</span><span class="pill pill--mvpi">HED</span><span class="pill pill--mvpi">ALT</span><span class="pill pill--mvpi">AFF</span><span class="pill pill--mvpi">TRA</span><span class="pill pill--mvpi">SEC</span><span class="pill pill--mvpi">COM</span><span class="pill pill--mvpi">AES</span><span class="pill pill--mvpi">SCI</span>
+      <span class="pill pill--mvpi">REC</span><span class="pill pill--mvpi">POW</span><span class="pill pill--mvpi">HED</span><span class="pill pill--mvpi">ALT</span><span class="pill pill--mvpi">AFF</span><span class="pill pill--mvpi">TRA</span><span class="pill pill--mvpi">SEC</span><span class="pill pill--mvpi">COM</span><span class="pill pill--mvpi">AES</span><span class="pill pill--mvpi">SCI</span>
+      <span class="pill pill--mvpi">REC</span><span class="pill pill--mvpi">POW</span><span class="pill pill--mvpi">HED</span><span class="pill pill--mvpi">ALT</span><span class="pill pill--mvpi">AFF</span><span class="pill pill--mvpi">TRA</span><span class="pill pill--mvpi">SEC</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== VALUE =================== -->
+<section class="section" id="about-program">
+  <div class="wrap">
+    <div class="value-grid">
+      <div>
+        <span class="eyebrow">Ценность программы</span>
+        <h2 style="margin-top:1rem;">Работа с профилем, не пересказ&nbsp;шкал.</h2>
+      </div>
+      <div class="value-body">
+        <p>
+          Программа собирает практику интерпретации в одну рамку. Не как набор отдельных
+          приёмов, а как способ работать с профилем целиком: видеть структуру, удерживать
+          контекст роли и аккуратно соединять данные с тем, что специалист уже видит в человеке.
+        </p>
+        <p>
+          Содержательные тезисы программы — формулировки ценности, обещания и точные акценты — Андрей
+          сформулирует отдельно. Здесь мы фиксируем каркас: о чём этот блок и какую работу
+          он делает на странице.
+        </p>
+        <div class="pull">«Сначала фиксируем, что видно. Потом — как смотреть. Потом — что меняется в чтении».</div>
+        <span class="pending-note">Точные формулировки — от ведущего</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ICP =================== -->
+<section class="icp">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Для кого программа</span>
+        <span class="side-label">ICP — рамка</span>
+      </div>
+      <h2>Программа собрана для практиков, у которых уже есть база — и появились реальные вопросы.</h2>
+    </div>
+    <div class="icp-grid">
+      <div class="icp-col">
+        <h3>Кому подходит</h3>
+        <p class="lead-small">Уровень работы с Hogan и тип задач.</p>
+        <ul>
+          <li>Сертифицированные Hogan-практики, выходящие из учебных кейсов в живую работу.</li>
+          <li>Консультанты по оценке и развитию, работающие с управленческим контекстом.</li>
+          <li>HRD, L&amp;D и talent-лидеры, использующие Hogan как инструмент решений по людям.</li>
+          <li>Executive coaches и leadership consultants, встраивающие Hogan в разговор о развитии.</li>
+        </ul>
+      </div>
+      <div class="icp-col">
+        <h3>Когда формат подходит сейчас</h3>
+        <p class="lead-small">Типичные ситуации, с которыми приходят участники.</p>
+        <ul>
+          <li>Профиль не складывается; данные расходятся с наблюдением.</li>
+          <li>Нужно вести feedback руководителю, который не согласен с выводами.</li>
+          <li>Заказчик ждёт решения по человеку, а не пересказа отчёта.</li>
+          <li>Хочется проверить собственные интерпретации с коллегами уровня.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="margin-top: 1.5rem; font-size:0.9rem; max-width:60ch;">
+      Если вы не уверены, что формат подходит сейчас, начните со встречи-знакомства 30 мая
+      или <a href="signup.html?context=call" class="inline-link">короткого звонка</a>.
+    </p>
+  </div>
+</section>
+
+<!-- =================== RESULTS (placeholder grid) =================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Что участник получает</span>
+        <span class="side-label">Результаты · черновой каркас</span>
+      </div>
+      <h2>Шесть результатов, на которых держится программа.</h2>
+      <p class="lead">Точные формулировки результатов Андрей даст отдельно. Ниже — структура блока, по которой потом будут разложены конкретные результаты участника, клиента и заказчика.</p>
+    </div>
+    <div class="results-grid" role="list">
+      <div class="r" role="listitem"><span class="num">01</span><h4>Рамка чтения профиля</h4><p>Главный результат программы. Точная формулировка — от ведущего.</p></div>
+      <div class="r" role="listitem"><span class="num">02</span><h4>Связь шкал и контекста</h4><p>Как роль, уровень и задача меняют смысл данных. Уточнение от ведущего.</p></div>
+      <div class="r" role="listitem"><span class="num">03</span><h4>Работа с противоречиями</h4><p>Что делать, когда профиль расходится с впечатлением. Текст уточняется.</p></div>
+      <div class="r" role="listitem"><span class="num">04</span><h4>Feedback-практика</h4><p>Точность и устойчивость в разговоре с руководителем. Формулировка уточняется.</p></div>
+      <div class="r" role="listitem"><span class="num">05</span><h4>Язык разговора с заказчиком</h4><p>Как выходить на уровень решения, а не пересказа. Текст от ведущего.</p></div>
+      <div class="r" role="listitem"><span class="num">06</span><h4>Своя профессиональная рамка</h4><p>Своя интерпретационная позиция — уточнение от ведущего.</p></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;gap:1rem;flex-wrap:wrap;">
+      <span class="pending-note">Финальные формулировки — от ведущего</span>
+      <a href="signup.html" class="btn btn--outline btn--sm">Подать заявку <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== STRIP — "Отчёт за полчаса" =================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="strip">
+      <div class="strip-bg" style="background-image:url('assets/img/people-wall.avif');"></div>
+      <div class="strip-inner">
+        <div class="strip-eyebrow">Прикладной приём</div>
+        <h3 class="strip-title">Отчёт за полчаса.</h3>
+        <p class="strip-text">
+          Программа учит быстро собирать главное: что в профиле является рамкой, где риск,
+          где сила, что важно проверить в разговоре и какой вывод выдержит встречу с
+          заказчиком. Точная формулировка плашки — от ведущего, фиксируем место.
+        </p>
+        <div class="strip-cta">
+          <a href="signup.html?context=znakomstvo-30-05" class="btn btn--cream btn--sm">Записаться на знакомство <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MODULES =================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Структура программы</span>
+        <span class="side-label">5 модулей · 5 суббот</span>
+      </div>
+      <h2>Структура программы зарезервирована под итоговую разбивку модулей.</h2>
+      <p class="lead">Содержание каждого модуля Андрей подтвердит отдельно. Ниже — каркас, в который лягут итоговые названия и описания.</p>
+    </div>
+    <div class="modules-list">
+      <article class="module">
+        <span class="m-num">I</span>
+        <div class="m-title">Рамка профиля</div>
+        <p class="m-desc">Что является каркасом интерпретации. Как быстро собрать первичную гипотезу. Точное содержание — от ведущего.</p>
+        <span class="m-tag">Суббота 1</span>
+      </article>
+      <article class="module">
+        <span class="m-num">II</span>
+        <div class="m-title">HPI · HDS · MVPI в связке</div>
+        <p class="m-desc">Взаимодействие сильных сторон, рисков и мотиваторов. Содержание уточняется ведущим.</p>
+        <span class="m-tag">Суббота 2</span>
+      </article>
+      <article class="module">
+        <span class="m-num">III</span>
+        <div class="m-title">Профиль и контекст роли</div>
+        <p class="m-desc">Как роль, уровень и культура меняют чтение профиля. Формулировка уточняется.</p>
+        <span class="m-tag">Суббота 3</span>
+      </article>
+      <article class="module">
+        <span class="m-num">IV</span>
+        <div class="m-title">Feedback-практика</div>
+        <p class="m-desc">Как вести обратную связь, когда вывод не очевиден или встречает сопротивление.</p>
+        <span class="m-tag">Суббота 4</span>
+      </article>
+      <article class="module">
+        <span class="m-num">V</span>
+        <div class="m-title">Сложные кейсы и решения</div>
+        <p class="m-desc">Разбор анонимизированных кейсов участников. Профили, влияющие на решения по человеку.</p>
+        <span class="m-tag">Суббота 5</span>
+      </article>
+    </div>
+    <span class="pending-note" style="margin-top:1.25rem;">Финальные названия и описания модулей — от ведущего</span>
+  </div>
+</section>
+
+<!-- =================== FORMAT (Saturday logic) =================== -->
+<section class="section format-section">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow eyebrow--on-dark">Формат субботы</span>
+        <span class="side-label" style="color:rgba(244,239,227,0.5);">Working room, не вебинар</span>
+      </div>
+      <h2>Как устроено одно занятие.</h2>
+      <p class="lead">Каждая суббота построена вокруг работы участника с собственным профилем или задачей. Группа маленькая, поэтому каждая встреча — это не лекция, а совместный разбор.</p>
+    </div>
+    <div class="format-steps" role="list">
+      <div class="step" role="listitem"><div class="n">01</div><h4>Что видит участник сейчас</h4><p>Участник приходит со своим профилем или рабочим вопросом. Фиксируем первое прочтение: что он сейчас видит и какие выводы делает.</p></div>
+      <div class="step" role="listitem"><div class="n">02</div><h4>Как смотреть и что делать</h4><p>Андрей показывает рамку: как читать материал, на что опираться, как удерживать структуру и контекст.</p></div>
+      <div class="step" role="listitem"><div class="n">03</div><h4>Применение к своим профилям</h4><p>Участники применяют рамку к собственным профилям и задачам. Не учебные, а реальные анонимизированные кейсы.</p></div>
+      <div class="step" role="listitem"><div class="n">04</div><h4>Что увидели иначе</h4><p>Сравниваем: что видели в начале и что начали видеть по-другому после применения рамки.</p></div>
+      <div class="step" role="listitem"><div class="n">05</div><h4>Выводы и ограничения</h4><p>Фиксируем, где интерпретация работает, где требует проверки и где её честнее не достраивать.</p></div>
+      <div class="step" role="listitem"><div class="n">06</div><h4>Следующий шаг в работе</h4><p>Договариваемся, какой следующий шаг участник делает с этим профилем или задачей в своей реальной работе.</p></div>
+    </div>
+    <div class="format-facts-row">
+      <span>Суббота</span><span>Онлайн</span><span>Малая группа 6–8</span><span>Реальные анонимизированные кейсы</span><span>Конфиденциальность</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CASES =================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Где применяется</span>
+        <span class="side-label">Рабочие ситуации</span>
+      </div>
+      <h2>Шесть ситуаций, где программа помогает.</h2>
+    </div>
+    <div class="cases-list">
+      <article class="case-item"><div class="case-num">— 01</div><h4>Профиль не складывается</h4><p>Данные говорят одно, наблюдение — другое. Программа даёт способ удерживать оба слоя и работать с ними, не отбрасывая ни один.</p></article>
+      <article class="case-item"><div class="case-num">— 02</div><h4>Высокий HDS у успешного руководителя</h4><p>Как читать риски, когда они сочетаются с результатами и сильной командой.</p></article>
+      <article class="case-item"><div class="case-num">— 03</div><h4>Несогласный руководитель</h4><p>Feedback человеку, который не готов сразу принять интерпретацию профиля. Как вести разговор, удерживая доверие и точность.</p></article>
+      <article class="case-item"><div class="case-num">— 04</div><h4>Заказчик ждёт решения</h4><p>Ситуация, когда от консультанта ждут вывода о человеке, а не пересказа отчёта.</p></article>
+      <article class="case-item"><div class="case-num">— 05</div><h4>Связка Hogan с ролью</h4><p>Как соединить профиль с реальным управленческим контекстом, риском и развитием.</p></article>
+      <article class="case-item"><div class="case-num">— 06</div><h4>Сильный кандидат не подходит</h4><p>Как аккуратно работать с мотивационным несоответствием, когда формальные показатели в норме.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- =================== TRUST STRIP =================== -->
+<section class="trust" aria-label="Доверие к программе">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="t"><span class="num">2014</span><span class="lab">Год начала практики</span></div>
+      <div class="t"><span class="num">6–8</span><span class="lab">Размер группы</span></div>
+      <div class="t"><span class="num">5</span><span class="lab">Суббот в потоке</span></div>
+      <div class="t"><span class="num">Реальные</span><span class="lab">Анонимизированные кейсы</span></div>
+    </div>
+    <p class="muted" style="font-size:0.82rem;margin-top:1.25rem;max-width:60ch;">
+      Конкретные цифры по feedback-сессиям и потокам Андрей подтвердит отдельно — место для них зарезервировано.
+    </p>
+  </div>
+</section>
+
+<!-- =================== HOST =================== -->
+<section class="section" id="host">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">О ведущем</span>
+        <span class="side-label">Андрей Егоров</span>
+      </div>
+    </div>
+    <div class="host">
+      <aside class="host-card">
+        <h3>Андрей Егоров</h3>
+        <div class="role">Психолог · психодиагност · Hogan-практик</div>
+        <ul>
+          <li>Работает с Hogan с 2014 года</li>
+          <li>Сертификации Hogan 2016 и 2019</li>
+          <li>Около 10 лет практики в Odgers Berndtson</li>
+          <li>Работа с C-level и управленческими командами</li>
+          <li>Feedback по профилям и executive-консультирование</li>
+        </ul>
+      </aside>
+      <div class="host-body">
+        <p>
+          Андрей ведёт программу, опираясь на десять с лишним лет работы с управленческой
+          оценкой и обратной связью. Hogan для него — не отдельный отчёт, а часть разговора
+          о человеке в роли: где у него ресурс, где риск, что важно проверить и какой вывод
+          выдержит встречу с заказчиком.
+        </p>
+        <p>
+          Точные акценты раздела «О ведущем» — численные данные по feedback-сессиям, перечень
+          контекстов, конкретные сферы — мы согласуем отдельно. Здесь зарезервировано место
+          под итоговую формулировку.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <a href="signup.html?context=call" class="btn btn--outline btn--sm">Договориться о звонке</a>
+          <a href="space.html" class="btn btn--ghost btn--sm">О пространстве Executive Minds →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FAQ =================== -->
+<section class="section" style="background:var(--cream-soft);border-block:1px solid var(--line);">
+  <div class="wrap-narrow">
+    <div class="section-header">
+      <span class="eyebrow">Частые вопросы</span>
+      <h2 style="margin-top:1rem;">FAQ</h2>
+    </div>
+    <div>
+      <details class="faq-item">
+        <summary>Нужна ли сертификация Hogan для участия?</summary>
+        <p>Программа рассчитана на сертифицированных Hogan-практиков. Если у вас другой опыт работы с инструментом и вы не уверены, что формат подойдёт сейчас — напишите нам, и мы вместе посмотрим, имеет ли смысл встреча-знакомство 30 мая.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Можно ли идти после недавней сертификации?</summary>
+        <p>Да, программа специально собрана для перехода от учебных кейсов к живой работе. Если базовая сертификация только что закончилась, формат поможет уверенно встать на ноги в реальной интерпретации.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Сколько длится программа?</summary>
+        <p>5 суббот, онлайн, малая группа. Старт — 13 или 20 июня, по мере формирования группы. Точная финальная дата стартового занятия будет подтверждена после встречи-знакомства 30 мая.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Что такое встреча 30 мая?</summary>
+        <p>Это встреча-знакомство с группой. Возможность увидеть формат, услышать ведущего, познакомиться с участниками и понять, подходит ли программа вашему запросу. Встреча ни к чему не обязывает.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Что значит «старт 13 или 20 июня»?</summary>
+        <p>Точная дата старта зависит от того, как сформируется группа после встречи 30 мая. Мы фиксируем оба варианта, чтобы было пространство выбрать ту дату, которая лучше работает для собравшихся участников.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Можно ли приносить свои кейсы?</summary>
+        <p>Да, именно с этим программа и работает. Участник приходит со своим профилем, задачей или рабочим вопросом. Кейсы анонимизируются по правилам конфиденциальности.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Как обеспечивается конфиденциальность?</summary>
+        <p>Кейсы анонимизируются заранее. Внутренние договорённости группы про конфиденциальность фиксируются на первой встрече. Подробности — на встрече-знакомстве.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Чем это отличается от индивидуальной консультации?</summary>
+        <p>Программа даёт рамку и опыт совместного разбора в группе уровня. Индивидуальный формат подходит, если вам нужен разбор одного конкретного профиля сейчас — см. <a href="programs.html" class="inline-link">страницу всех программ</a>.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Что делать, если я не уверен, что мне подходит?</summary>
+        <p>Самое простое — прийти на встречу-знакомство 30 мая или <a href="signup.html?context=call" class="inline-link">договориться о коротком звонке</a>. Это способ проверить формат без обязательств.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FINAL CTA =================== -->
+<section class="final-cta">
+  <div class="final-cta-grid">
+    <div>
+      <span class="eyebrow eyebrow--on-dark">Следующий шаг</span>
+      <h2 style="margin-top:1rem;">Начните со встречи-знакомства <em>30 мая</em>.</h2>
+    </div>
+    <div>
+      <p>Если программа отзывается, проверьте её живьём: встреча с группой, формат разговора, вопросы ведущему. Старт основной работы — 13 или 20 июня, по мере формирования группы.</p>
+      <div class="cta-row">
+        <a href="signup.html?context=znakomstvo-30-05" class="btn btn--cream">Записаться на знакомство 30 мая <span class="arr">→</span></a>
+        <a href="signup.html?context=call" class="btn btn--outline-light btn--sm">Договориться о звонке</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Executive Minds</div>
+        <p class="footer-tag">Пространство для практиков Hogan Assessment. Обучение, сопровождение, профессиональный разговор.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Программа</h5>
+        <ul>
+          <li><a href="index.html">Ближайший курс</a></li>
+          <li><a href="programs.html">Все программы</a></li>
+          <li><a href="signup.html">Запись</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Пространство</h5>
+        <ul>
+          <li><a href="space.html">О пространстве</a></li>
+          <li><a href="signup.html?context=call">Договориться о звонке</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Документы</h5>
+        <ul>
+          <li><a href="privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="consent.html">Согласие на обработку данных</a></li>
+          <li><a href="cookies.html">Использование cookie</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© Executive Minds · ИП Егоров А. Г.</span>
+      <span>Москва · <a href="mailto:yegorovandrei@yandex.ru">yegorovandrei@yandex.ru</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== COOKIE =================== -->
+<div class="cookie" id="cookieBanner" role="dialog" aria-label="Уведомление об использовании cookie">
+  <div class="cookie-inner">
+    <p class="cookie-text">
+      Мы используем файлы cookie и сервис Яндекс Метрика для анализа посещаемости.
+      Подробнее — в <a href="privacy.html">Политике обработки персональных данных</a> и
+      <a href="cookies.html">уведомлении об использовании cookie</a>.
+    </p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn btn--cream btn--sm">Принять</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

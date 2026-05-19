@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О пространстве — Executive Minds</title>
+<meta name="description" content="Executive Minds — пространство для практиков Hogan Assessment. Среда, в которой люди знают уровень друг друга и могут вести профессиональный разговор.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C1F1A'/%3E%3Ctext x='50%25' y='62%25' text-anchor='middle' font-family='Georgia' fill='%23C9A065' font-size='22'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+  /* --- Space hero: editorial typographic, not computer imagery --- */
+  .space-hero {
+    background: var(--forest);
+    color: var(--cream);
+    padding: clamp(3.5rem, 7vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .space-hero .sh-grid {
+    max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad);
+    display: grid; grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem); align-items: end;
+  }
+  .space-hero .sh-eyebrow {
+    font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--amber-soft); margin-bottom: 2rem; display: inline-flex; gap: 0.6rem; align-items: center;
+  }
+  .space-hero .sh-eyebrow::before { content:''; width: 28px; height: 1px; background: var(--amber-soft); display: inline-block; }
+  .space-hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+    line-height: 1.04;
+    font-weight: 360;
+    color: var(--cream);
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+  }
+  .space-hero h1 em { font-style: italic; color: var(--amber-soft); font-weight: 380; }
+  .space-hero h1 .underline { display: inline-block; padding-bottom: 0.15em; box-shadow: inset 0 -2px 0 var(--amber); }
+  .space-hero .sh-sub {
+    font-size: 1.1rem; line-height: 1.6; max-width: 50ch;
+    color: rgba(244,239,227,0.78); margin-bottom: 2rem;
+  }
+  .space-hero .sh-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .space-hero .sh-side {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .space-hero .sh-side .lab { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,239,227,0.45); margin-bottom: 0.9rem; }
+  .space-hero .sh-side ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .space-hero .sh-side ul li { padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .space-hero .sh-side ul li:last-child { border-bottom: 0; }
+  .space-hero .sh-side ul li strong { display:block; font-family: var(--serif); font-weight: 440; font-size: 1.05rem; color: var(--cream); margin-bottom: 0.2rem; }
+  .space-hero .sh-side ul li span { font-size: 0.85rem; color: rgba(244,239,227,0.65); line-height: 1.5; display: block; }
+
+  /* Typographic mark — large editorial monogram in background */
+  .space-hero::before {
+    content: 'EM';
+    position: absolute;
+    right: -2vw; bottom: -8vw;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 40vw;
+    line-height: 0.8;
+    color: rgba(255,255,255,0.025);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.04em;
+  }
+  @media (max-width: 800px) {
+    .space-hero .sh-grid { grid-template-columns: 1fr; }
+    .space-hero .sh-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; }
+  }
+
+  /* Three directions */
+  .directions { background: var(--cream); }
+  .dir-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .dir-item { padding: 2.5rem clamp(1.5rem, 2.5vw, 2.25rem); border-right: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 0.8rem; }
+  .dir-item:last-child { border-right: 0; }
+  .dir-item .dir-num { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--moss); }
+  .dir-item h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 420; line-height: 1.15; }
+  .dir-item p { font-size: 0.96rem; color: var(--ink-soft); line-height: 1.6; }
+  .dir-item .dir-link { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; margin-top: auto; padding-top: 1rem; }
+  .dir-item .dir-link a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; }
+  .dir-item .dir-link a:hover { border-color: var(--ink); }
+  @media (max-width: 900px) { .dir-grid { grid-template-columns: 1fr; } .dir-item { border-right: 0; border-bottom: 1px solid var(--line-soft); } .dir-item:last-child { border-bottom: 0; } }
+
+  /* Quote section */
+  .quote-section { background: var(--cream-soft); border-bottom: 1px solid var(--line); }
+  .quote-grid { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: clamp(2rem, 4vw, 4rem); }
+  .quote-grid p.intro { font-size: 1.05rem; line-height: 1.65; color: var(--ink-soft); margin-bottom: 1.1rem; }
+  .quote-grid blockquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 380;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    line-height: 1.25;
+    color: var(--ink);
+    border-left: 2px solid var(--moss);
+    padding-left: 1.5rem;
+    max-width: 28ch;
+  }
+  @media (max-width: 800px) { .quote-grid { grid-template-columns: 1fr; } }
+
+  /* Matrix table */
+  .matrix {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--sans);
+  }
+  .matrix thead th {
+    text-align: left; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 600;
+    padding: 1rem 1rem; border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+  }
+  .matrix tbody td {
+    padding: 1.4rem 1rem; vertical-align: top;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 0.95rem; color: var(--ink-soft); line-height: 1.45;
+  }
+  .matrix tbody td.audience { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); font-weight: 440; max-width: 18ch; }
+  .matrix tbody td.cta a { font-family: var(--sans); font-size: 0.82rem; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; text-decoration: none; white-space: nowrap; }
+  .matrix tbody td.cta a:hover { color: var(--moss); border-color: var(--moss); }
+  .matrix tbody tr:hover td { background: var(--cream-soft); }
+  @media (max-width: 800px) {
+    .matrix, .matrix tbody, .matrix tr, .matrix td, .matrix thead, .matrix th { display: block; }
+    .matrix thead { display: none; }
+    .matrix tbody tr { border: 1px solid var(--line); margin-bottom: 1rem; padding: 0.5rem 0; }
+    .matrix tbody td { border: 0; padding: 0.5rem 1.25rem; }
+    .matrix tbody td::before { content: attr(data-label) ': '; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); display: block; margin-bottom: 0.25rem; }
+  }
+
+  /* Green strip — "other formats" */
+  .green-strip {
+    background: var(--moss);
+    color: var(--cream);
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+  .green-strip h3 { color: var(--cream); font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 380; margin-bottom: 0.5rem; }
+  .green-strip p { color: rgba(244,239,227,0.85); max-width: 56ch; margin-bottom: 1.25rem; }
+  .green-strip .row { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; }
+  .green-strip .row .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* People-strip atmospheric */
+  .atmos {
+    position: relative;
+    min-height: 280px;
+    padding: clamp(2rem, 5vw, 4rem) var(--pad);
+    background: var(--forest-2);
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .atmos .a-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.45) saturate(0.85); z-index: 0; }
+  .atmos .a-bg::after { content:''; position:absolute; inset:0; background: linear-gradient(0deg, rgba(12,31,26,0.85), rgba(12,31,26,0.4)); }
+  .atmos .a-inner { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; }
+  .atmos h3 { font-family: var(--serif); font-size: clamp(1.6rem, 2.8vw, 2.2rem); color: var(--cream); font-weight: 380; max-width: 22ch; margin-bottom: 1rem; }
+  .atmos p { color: rgba(244,239,227,0.82); max-width: 54ch; margin-bottom: 1.25rem; }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Главная навигация">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="dot" aria-hidden="true"></span>Executive Minds</a>
+    <ul class="nav-list" id="navList">
+      <li><a href="index.html">Ближайший курс</a></li>
+      <li><a href="space.html" class="is-active">О пространстве</a></li>
+      <li><a href="programs.html">Все программы</a></li>
+      <li><a href="signup.html">Запись</a></li>
+      <li class="nav-cta"><a href="signup.html" class="btn btn--sm btn--cream">Записаться <span class="arr">→</span></a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- =================== SPACE HERO — typographic, no computer imagery =================== -->
+<section class="space-hero" aria-label="Hero пространства Executive Minds">
+  <div class="sh-grid">
+    <div>
+      <div class="sh-eyebrow">Профессиональное пространство</div>
+      <h1>Среда для тех, кто работает с&nbsp;<em>Hogan</em> всерьёз.</h1>
+      <p class="sh-sub">
+        Executive Minds — это пространство общения, где можно найти собеседника,
+        партнёра на проект или получить помощь коллег, например, разобрать
+        неоднозначный кейс. Те, кто учился вместе, знают друг друга и понимают
+        уровень своих возможностей.
+      </p>
+      <div class="sh-cta">
+        <a href="index.html" class="btn btn--cream">Смотреть ближайший курс <span class="arr">→</span></a>
+        <a href="programs.html" class="btn btn--outline-light btn--sm">Все программы</a>
+      </div>
+    </div>
+    <aside class="sh-side">
+      <div class="lab">Три направления</div>
+      <ul>
+        <li><strong>Обучение</strong><span>Структурированные программы для практиков Hogan Assessment.</span></li>
+        <li><strong>Сопровождение</strong><span>Малые группы, супервизия, разбор кейсов с коллегами уровня.</span></li>
+        <li><strong>Профессиональный разговор</strong><span>Среда людей, понимающих инструмент и контекст работы.</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- HOGAN MARQUEE — quiet -->
+<section class="hogan-marquee hogan-marquee--inline" aria-hidden="true">
+  <div>
+    <div class="marquee-row marquee-row--slow">
+      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
+      <span class="pill pill--hds">EXC</span><span class="pill pill--hds">SKE</span><span class="pill pill--hds">CAU</span><span class="pill pill--hds">RES</span><span class="pill pill--hds">LEI</span><span class="pill pill--hds">BOL</span><span class="pill pill--hds">MIS</span><span class="pill pill--hds">COL</span><span class="pill pill--hds">IMG</span><span class="pill pill--hds">DIL</span><span class="pill pill--hds">DUT</span>
+      <span class="pill pill--mvpi">REC</span><span class="pill pill--mvpi">POW</span><span class="pill pill--mvpi">HED</span><span class="pill pill--mvpi">ALT</span><span class="pill pill--mvpi">AFF</span><span class="pill pill--mvpi">TRA</span><span class="pill pill--mvpi">SEC</span><span class="pill pill--mvpi">COM</span><span class="pill pill--mvpi">AES</span><span class="pill pill--mvpi">SCI</span>
+      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
+      <span class="pill pill--hds">EXC</span><span class="pill pill--hds">SKE</span><span class="pill pill--hds">CAU</span><span class="pill pill--hds">RES</span><span class="pill pill--hds">LEI</span><span class="pill pill--hds">BOL</span><span class="pill pill--hds">MIS</span><span class="pill pill--hds">COL</span><span class="pill pill--hds">IMG</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== THREE DIRECTIONS =================== -->
+<section class="directions section">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Что здесь происходит</span>
+        <span class="side-label">Три направления работы</span>
+      </div>
+      <h2>Executive Minds не сводится к одной программе.</h2>
+      <p class="lead">Пространство включает разные способы участия — от структурированного обучения до коротких профессиональных разговоров между специалистами.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top: 0.5rem;">
+    <div class="dir-grid">
+      <div class="dir-item">
+        <span class="dir-num">— 01</span>
+        <h3>Обучение</h3>
+        <p>Структурированные программы для углублённого освоения Hogan Assessment. Акцент на практике: интерпретация в контексте роли, управленческого уровня и культуры организации.</p>
+        <div class="dir-link"><a href="index.html">Ближайший курс →</a></div>
+      </div>
+      <div class="dir-item">
+        <span class="dir-num">— 02</span>
+        <h3>Сопровождение</h3>
+        <p>Малые группы для постоянного профессионального развития: разбор кейсов, супервизия, обмен опытом с коллегами, работающими с тем же инструментом.</p>
+        <div class="dir-link"><a href="programs.html">Все форматы →</a></div>
+      </div>
+      <div class="dir-item">
+        <span class="dir-num">— 03</span>
+        <h3>Профессиональный разговор</h3>
+        <p>Среда для обсуждения методологических вопросов и совместного осмысления того, как Hogan работает в реальных организационных условиях.</p>
+        <div class="dir-link"><a href="signup.html?context=call">Договориться о звонке →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== QUOTE — Среда, а не клуб =================== -->
+<section class="quote-section section">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Смысл пространства</span>
+      <h2 style="margin-top:1rem;">Среда, а не клуб.</h2>
+    </div>
+    <div class="quote-grid">
+      <div>
+        <p class="intro">
+          Executive Minds — не формальный клуб и не витрина программ. Это среда: те, кто учился вместе, знают уровень друг друга.
+        </p>
+        <p class="intro">
+          В будущем это становится пространством, где можно найти партнёра на проект,
+          попросить коллегу разобрать сложный кейс или обсудить профессиональный вопрос
+          с человеком, который понимает инструмент.
+        </p>
+      </div>
+      <blockquote>«Вопрос „с кем ты работаешь“ начинается с вопроса „с кем ты учился“.»</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ATMOSPHERIC STRIP — people, not computer =================== -->
+<section style="padding: 0 var(--pad); margin: clamp(3rem,5vw,4.5rem) 0;">
+  <div style="max-width: var(--maxw); margin: 0 auto;">
+    <div class="atmos">
+      <div class="a-bg" style="background-image:url('assets/img/people-wall.avif');"></div>
+      <div class="a-inner">
+        <div class="strip-eyebrow">Знакомство поколений</div>
+        <h3>Тот, кто только начинает практику, и тот, кто работает с Hogan много лет, делают разговор сильнее.</h3>
+        <p>
+          Начинающие после сертификации приносят вопросы в самую суть. Опытные — приносят сложные кейсы.
+          Встреча этих уровней и есть среда, на которой строится Executive Minds.
+        </p>
+        <a href="programs.html" class="btn btn--cream btn--sm">Все программы <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MATRIX =================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Аудитории и форматы</span>
+        <span class="side-label">Матрица выбора</span>
+      </div>
+      <h2>Где вы сейчас, какой запрос, какой формат подходит.</h2>
+    </div>
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Аудитория</th>
+          <th>Запрос</th>
+          <th>Формат</th>
+          <th>Результат</th>
+          <th>Следующий шаг</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="audience" data-label="Аудитория">Недавно сертифицированные Hogan-практики</td>
+          <td data-label="Запрос">Перейти от знания шкал к уверенной интерпретации.</td>
+          <td data-label="Формат">Глубинная интерпретация профилей Hogan</td>
+          <td data-label="Результат">Рамка чтения профиля и feedback-практика.</td>
+          <td class="cta" data-label="Шаг"><a href="index.html">Смотреть курс →</a></td>
+        </tr>
+        <tr>
+          <td class="audience" data-label="Аудитория">Опытные консультанты</td>
+          <td data-label="Запрос">Разбирать сложные, противоречивые кейсы.</td>
+          <td data-label="Формат">Супервизорская группа</td>
+          <td data-label="Результат">Другие точки зрения, проверка гипотез.</td>
+          <td class="cta" data-label="Шаг"><a href="signup.html?context=supervision">Подать запрос →</a></td>
+        </tr>
+        <tr>
+          <td class="audience" data-label="Аудитория">HRD · L&amp;D · talent-лидеры</td>
+          <td data-label="Запрос">Использовать Hogan внутри организации.</td>
+          <td data-label="Формат">Корпоративное обучение</td>
+          <td data-label="Результат">Единый язык оценки и развития.</td>
+          <td class="cta" data-label="Шаг"><a href="signup.html?context=corporate">Обсудить формат →</a></td>
+        </tr>
+        <tr>
+          <td class="audience" data-label="Аудитория">Executive coaches</td>
+          <td data-label="Запрос">Встраивать Hogan в разговор о развитии.</td>
+          <td data-label="Формат">Индивидуальная консультация</td>
+          <td data-label="Результат">Точнее связывать профиль, роль и поведение.</td>
+          <td class="cta" data-label="Шаг"><a href="signup.html?context=individual">Записаться →</a></td>
+        </tr>
+        <tr>
+          <td class="audience" data-label="Аудитория">Команды консультантов</td>
+          <td data-label="Запрос">Усилить общую методологию работы.</td>
+          <td data-label="Формат">Корпоративный воркшоп</td>
+          <td data-label="Результат">Согласованная рамка интерпретации.</td>
+          <td class="cta" data-label="Шаг"><a href="signup.html?context=workshop">Оставить заявку →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- =================== "NEW SUPER-POWER" STRIP =================== -->
+<section style="padding: 0 var(--pad);">
+  <div style="max-width: var(--maxw); margin: 0 auto;">
+    <div class="strip">
+      <div class="strip-bg" style="background-image:url('assets/img/group-board.avif');"></div>
+      <div class="strip-inner">
+        <div class="strip-eyebrow">Что даёт пространство</div>
+        <h3 class="strip-title">Собирать картину, не только шкалы.</h3>
+        <p class="strip-text">
+          Видеть, где данные подтверждают вашу профессиональную интуицию, где её уточняют,
+          а где показывают слепую зону. Это происходит не из одного курса — это происходит из среды.
+        </p>
+        <div class="strip-cta">
+          <a href="index.html" class="btn btn--cream btn--sm">Смотреть ближайший курс <span class="arr">→</span></a>
+          <a href="programs.html" class="btn btn--outline-light btn--sm">Все программы</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== GREEN STRIP — chat -->
+<section class="green-strip section-tight" style="margin-top: clamp(3rem,5vw,4.5rem);">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <span class="eyebrow eyebrow--on-dark" style="color: var(--cream);">Нужен совет?</span>
+        <h3 style="margin-top:0.6rem;">Напишите в группу.</h3>
+        <p>Иногда лучший следующий шаг — не ещё один отчёт, а вопрос коллегам: «как бы вы прочитали этот профиль?» Executive Minds создаётся именно для таких разговоров.</p>
+      </div>
+      <div class="cta">
+        <a href="signup.html?context=call" class="btn btn--cream">Оставить заявку <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FINAL CTA -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Следующий шаг</span>
+      <h2 id="contact" style="margin-top:1rem;">Куда дальше.</h2>
+      <p class="lead">Два пути в зависимости от того, что вам сейчас нужно.</p>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2vw, 2rem);">
+      <div class="card">
+        <span class="meta">Если вы знаете формат</span>
+        <h3>Смотреть ближайший курс</h3>
+        <p>Глубинная интерпретация профилей Hogan. Встреча-знакомство с группой — 30 мая.</p>
+        <div style="margin-top: auto; padding-top: 0.5rem;"><a href="index.html" class="btn btn--primary btn--sm">К программе <span class="arr">→</span></a></div>
+      </div>
+      <div class="card">
+        <span class="meta">Если выбираете формат</span>
+        <h3>Подобрать формат</h3>
+        <p>Оставьте запрос — мы посмотрим уровень опыта и предложим следующий шаг: курс, встречу, супервизорскую группу или индивидуальный разбор.</p>
+        <div style="margin-top: auto; padding-top: 0.5rem;"><a href="signup.html" class="btn btn--outline btn--sm">Открыть форму <span class="arr">→</span></a></div>
+      </div>
+    </div>
+    <style>@media (max-width: 700px) { .card-row-mobile { grid-template-columns: 1fr !important; } }</style>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Executive Minds</div>
+        <p class="footer-tag">Пространство для практиков Hogan Assessment. Обучение, сопровождение, профессиональный разговор.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Программа</h5>
+        <ul>
+          <li><a href="index.html">Ближайший курс</a></li>
+          <li><a href="programs.html">Все программы</a></li>
+          <li><a href="signup.html">Запись</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Пространство</h5>
+        <ul>
+          <li><a href="space.html">О пространстве</a></li>
+          <li><a href="signup.html?context=call">Договориться о звонке</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Документы</h5>
+        <ul>
+          <li><a href="privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="consent.html">Согласие на обработку данных</a></li>
+          <li><a href="cookies.html">Использование cookie</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© Executive Minds · ИП Егоров А. Г.</span>
+      <span>Москва · <a href="mailto:yegorovandrei@yandex.ru">yegorovandrei@yandex.ru</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookieBanner" role="dialog" aria-label="Уведомление об использовании cookie">
+  <div class="cookie-inner">
+    <p class="cookie-text">
+      Мы используем файлы cookie и сервис Яндекс Метрика для анализа посещаемости.
+      Подробнее — в <a href="privacy.html">Политике обработки персональных данных</a> и
+      <a href="cookies.html">уведомлении об использовании cookie</a>.
+    </p>
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="btn btn--cream btn--sm">Принять</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/site.js" defer></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

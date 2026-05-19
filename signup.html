@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Запись — Executive Minds</title>
+<meta name="description" content="Оставьте заявку на курс Глубинной интерпретации профилей Hogan, встречу-знакомство 30 мая или другой формат Executive Minds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C1F1A'/%3E%3Ctext x='50%25' y='62%25' text-anchor='middle' font-family='Georgia' fill='%23C9A065' font-size='22'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+  .signup-hero { background: var(--cream); padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem); border-bottom: 1px solid var(--line); }
+  .signup-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 380; line-height: 1.06; letter-spacing: -0.015em; margin-bottom: 1rem; max-width: 22ch; }
+  .signup-hero h1 em { font-style: italic; color: var(--moss); font-weight: 380; }
+  .signup-hero p.lead { font-size: 1.05rem; max-width: 60ch; }
+
+  .signup-body { padding: clamp(2.5rem, 5vw, 4rem) 0; }
+  .form-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  @media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+  .form-submit { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; padding-top: 0.5rem; }
+  .form-note { font-size: 0.82rem; color: var(--ink-mute); max-width: 50ch; line-height: 1.55; }
+
+  /* Sidebar */
+  .side-box { background: var(--paper); border: 1px solid var(--line-soft); padding: 1.75rem; }
+  .side-box h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 440; margin-bottom: 1rem; }
+  .step-list { list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 0.9rem; }
+  .step-list li { counter-increment: s; position: relative; padding-left: 2.25rem; font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; }
+  .step-list li::before {
+    content: counter(s, decimal-leading-zero);
+    position: absolute; left: 0; top: 0;
+    font-family: var(--serif); font-style: italic; color: var(--moss); font-size: 1rem;
+  }
+
+  .context-card { background: var(--forest); color: var(--cream); padding: 1.6rem 1.75rem; margin-top: 1.25rem; }
+  .context-card h4 { color: var(--cream); font-family: var(--serif); font-weight: 440; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .context-card p { color: rgba(244,239,227,0.78); font-size: 0.9rem; line-height: 1.55; }
+  .context-card .lab { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber-soft); margin-bottom: 0.6rem; }
+
+  /* Success */
+  .form-success {
+    display: none;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--moss);
+    padding: 1.75rem 1.85rem;
+  }
+  .form-success.is-visible { display: block; }
+  .form-success h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 440; margin-bottom: 0.5rem; }
+  .form-success p { color: var(--ink-soft); font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Главная навигация">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="dot" aria-hidden="true"></span>Executive Minds</a>
+    <ul class="nav-list" id="navList">
+      <li><a href="index.html">Ближайший курс</a></li>
+      <li><a href="space.html">О пространстве</a></li>
+      <li><a href="programs.html">Все программы</a></li>
+      <li><a href="signup.html" class="is-active">Запись</a></li>
+      <li class="nav-cta"><a href="signup.html" class="btn btn--sm btn--cream">Записаться <span class="arr">→</span></a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="signup-hero">
+  <div class="wrap">
+    <span class="eyebrow">Запись и знакомство</span>
+    <h1 style="margin-top:1rem;">Оставьте заявку <em>или выберите формат</em>.</h1>
+    <p class="lead">Заполните короткую форму. Если вы уже знаете формат — выберите его. Если нет — опишите контекст, и мы предложим следующий шаг: курс, встречу 30 мая, супервизорскую группу, индивидуальный разбор или корпоративный формат.</p>
+  </div>
+</section>
+
+<section class="signup-body">
+  <div class="wrap">
+    <div class="form-grid">
+      <div>
+        <form class="form" id="signupForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Имя и фамилия</label>
+              <input type="text" id="name" name="name" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="contact">Телефон или Telegram</label>
+              <input type="text" id="contact" name="contact" placeholder="+7… или @username" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="format">Что сейчас интересует</label>
+              <select id="format" name="format">
+                <option value="">— выберите формат —</option>
+                <option value="znakomstvo-30-05">Встреча-знакомство 30 мая</option>
+                <option value="course">Курс «Глубинная интерпретация профилей Hogan»</option>
+                <option value="supervision">Супервизорская группа</option>
+                <option value="individual">Индивидуальная консультация</option>
+                <option value="corporate">Корпоративное обучение</option>
+                <option value="picker">Помогите подобрать формат</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="experience">Опыт работы с Hogan</label>
+            <select id="experience" name="experience">
+              <option value="">— выберите вариант —</option>
+              <option>Только что сертифицирован(а)</option>
+              <option>1–3 года практики</option>
+              <option>3–7 лет практики</option>
+              <option>7+ лет практики</option>
+              <option>Без сертификации, но работаю с инструментом</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="request">Запрос — кратко</label>
+            <textarea id="request" name="request" placeholder="Опишите, с каким вопросом или ситуацией вы приходите. Это помогает предложить точный следующий шаг."></textarea>
+          </div>
+
+          <label class="checkbox-row">
+            <input type="checkbox" id="consent" name="consent" required>
+            <span>Я согласен(на) на обработку персональных данных в соответствии с
+              <a href="privacy.html" class="inline-link">Политикой конфиденциальности</a> и
+              <a href="consent.html" class="inline-link">условиями согласия</a>.
+            </span>
+          </label>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn--primary">Отправить заявку <span class="arr">→</span></button>
+            <a href="signup.html?context=call" class="btn btn--outline btn--sm">Договориться о звонке</a>
+          </div>
+          <p class="form-note">Это превью-форма: отправка демонстрационная, ответ не уходит на сервер. Окончательная интеграция и адрес обработки заявок — на этапе подключения бекенда.</p>
+        </form>
+
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <h3>Заявка принята.</h3>
+          <p>Это превью. На рабочей версии сайта мы отправим письмо-подтверждение и свяжемся в течение 1–2 рабочих дней — на встречу-знакомство 30 мая или для короткого разговора.</p>
+        </div>
+      </div>
+
+      <aside>
+        <div class="side-box">
+          <h3>Что будет дальше</h3>
+          <ol class="step-list">
+            <li>Вы оставляете заявку — это занимает 2 минуты.</li>
+            <li>Мы смотрим запрос и уровень опыта.</li>
+            <li>Договариваемся о звонке или встрече с группой 30 мая.</li>
+            <li>Если формат подходит, вы получаете детали участия.</li>
+          </ol>
+        </div>
+
+        <div class="context-card" id="contextCard" hidden>
+          <div class="lab" id="ctxLab">Контекст</div>
+          <h4 id="ctxTitle"></h4>
+          <p id="ctxText"></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Executive Minds</div>
+        <p class="footer-tag">Пространство для практиков Hogan Assessment. Обучение, сопровождение, профессиональный разговор.</p>
+      </div>
+      <div class="footer-col"><h5>Программа</h5><ul><li><a href="index.html">Ближайший курс</a></li><li><a href="programs.html">Все программы</a></li><li><a href="signup.html">Запись</a></li></ul></div>
+      <div class="footer-col"><h5>Пространство</h5><ul><li><a href="space.html">О пространстве</a></li><li><a href="signup.html?context=call">Договориться о звонке</a></li></ul></div>
+      <div class="footer-col"><h5>Документы</h5><ul><li><a href="privacy.html">Политика конфиденциальности</a></li><li><a href="consent.html">Согласие на обработку данных</a></li><li><a href="cookies.html">Использование cookie</a></li></ul></div>
+    </div>
+    <div class="footer-base">
+      <span>© Executive Minds · ИП Егоров А. Г.</span>
+      <span>Москва · <a href="mailto:yegorovandrei@yandex.ru">yegorovandrei@yandex.ru</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookieBanner" role="dialog" aria-label="Уведомление об использовании cookie">
+  <div class="cookie-inner">
+    <p class="cookie-text">Мы используем файлы cookie и сервис Яндекс Метрика для анализа посещаемости. Подробнее — в <a href="privacy.html">Политике обработки персональных данных</a> и <a href="cookies.html">уведомлении об использовании cookie</a>.</p>
+    <div class="cookie-actions"><button id="cookieAccept" class="btn btn--cream btn--sm">Принять</button></div>
+  </div>
+</div>
+
+<script src="assets/js/site.js" defer></script>
+<script>
+  // Context prefill: ?context=znakomstvo-30-05, ?context=call, ?context=picker, etc.
+  (function () {
+    var ctxMap = {
+      'znakomstvo-30-05': { title: 'Встреча-знакомство 30 мая', text: 'Вы пришли со страницы курса. Встреча — это возможность увидеть формат, услышать ведущего и понять, подходит ли программа сейчас. Встреча ни к чему не обязывает.' },
+      'course':          { title: 'Глубинная интерпретация профилей Hogan', text: 'Курс из 5 суббот, малая группа, старт 13 или 20 июня. Перед стартом — встреча-знакомство 30 мая.' },
+      'supervision':     { title: 'Супервизорская группа', text: 'Регулярный формат для опытных практиков. После заявки — короткий разговор для уточнения уровня и запроса.' },
+      'individual':      { title: 'Индивидуальная консультация', text: 'Разбор одного профиля. После заявки уточним условия и дату.' },
+      'corporate':       { title: 'Корпоративное обучение', text: 'Программа собирается под задачу организации. После заявки назначим установочный звонок.' },
+      'picker':          { title: 'Подбор формата', text: 'Вы выбираете формат. Опишите запрос — мы предложим следующий шаг: курс, встречу, супервизию или индивидуальный разбор.' },
+      'call':            { title: 'Короткий звонок', text: 'Короткий разговор с Андреем — без обязательств. Удобно, когда нужно сверить ожидания до заявки.' },
+      'workshop':        { title: 'Корпоративный воркшоп', text: 'Формат собирается под команду консультантов. После заявки — установочная встреча.' }
+    };
+    var params = new URLSearchParams(location.search);
+    var ctx = params.get('context');
+    if (ctx && ctxMap[ctx]) {
+      document.getElementById('ctxTitle').textContent = ctxMap[ctx].title;
+      document.getElementById('ctxText').textContent  = ctxMap[ctx].text;
+      document.getElementById('contextCard').hidden = false;
+      var sel = document.getElementById('format');
+      if (sel) {
+        var optMap = { 'znakomstvo-30-05':'znakomstvo-30-05','course':'course','supervision':'supervision','individual':'individual','corporate':'corporate','picker':'picker','workshop':'corporate','call':'picker' };
+        if (optMap[ctx]) sel.value = optMap[ctx];
+      }
+    }
+    // Demo submit
+    var form = document.getElementById('signupForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('is-visible');
+      window.scrollTo({ top: form.offsetTop - 80, behavior: 'smooth' });
+    });
+  })();
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
