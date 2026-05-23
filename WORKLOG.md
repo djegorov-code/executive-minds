@@ -4,6 +4,21 @@
 
 ---
 
+### 2026-05-23 — Контент-аудит и deploy
+
+**Добавлено:**
+- Секция «Предыдущие группы» — timeline 2023–2026 (5 групп), commit `286c59e`
+- Сертификаты в блок ведущего: cert-hogan-1.png, cert-hogan-2.png, cert-hogan-apac.jpeg
+- Исправлен оборванный текст в Origin Story («два фактора» без объяснения)
+- Formspree placeholder в signup.html — явный комментарий с инструкцией
+- Запушено на GitHub Pages: https://djegorov-code.github.io/executive-minds/
+
+**Ожидает:**
+- Formspree ID (зарегистрироваться на formspree.io → получить ID → заменить `REPLACE_WITH_YOUR_FORMSPREE_ID`)
+- Desktop-файл `last breath/Executive Minds/index.html` — не сравнивался (заблокирован)
+
+---
+
 ### 2026-05-23 — Секция отзывов
 
 - Добавлена секция «Отзывы» между Trust strip и Ведущим
