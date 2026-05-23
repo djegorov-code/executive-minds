@@ -207,6 +207,19 @@
   .trust-grid .t .num { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1; }
   .trust-grid .t .lab { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
   @media (max-width: 700px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* Testimonials */
+  .quotes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+  .quote-card { background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .quote-card p { font-family: var(--serif); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.65; color: var(--ink-soft); font-style: italic; flex: 1; }
+  .quote-card .quote-tag { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+  .quote-featured { grid-column: 1 / -1; background: var(--forest); border-color: transparent; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; border-radius: 10px; }
+  .quote-featured blockquote { font-family: var(--serif); font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.7; color: rgba(244,239,227,0.9); font-style: italic; margin: 0; }
+  .quote-featured .qf-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+  .quote-featured .qf-name { font-family: var(--sans); font-weight: 600; color: var(--cream); font-size: 1rem; }
+  .quote-featured .qf-role { font-family: var(--sans); font-size: 0.8rem; color: rgba(244,239,227,0.55); letter-spacing: 0.08em; }
+  @media (max-width: 800px) { .quotes-grid { grid-template-columns: 1fr; } .quote-featured { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .quotes-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -484,6 +497,52 @@
       <div class="t"><span class="num">12+</span><span class="lab">Лет с Hogan</span></div>
       <div class="t"><span class="num">300+</span><span class="lab">Профилей в год</span></div>
       <div class="t"><span class="num">до 8</span><span class="lab">Человек в группе</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== TESTIMONIALS =================== -->
+<section class="section" aria-label="Отзывы участников">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Отзывы</span>
+        <span class="side-label">Участники предыдущих потоков</span>
+      </div>
+      <h2>Что говорят те,<br>кто прошёл.</h2>
+    </div>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <p>«Ценность — в сочетаниях шкал. Это не как на сертификации. Тут многогранно, объёмно видишь клиента.»</p>
+        <span class="quote-tag">О глубине</span>
+      </div>
+      <div class="quote-card">
+        <p>«Это другой уровень глубины. Как бинокль — ты его настроил, и видишь иначе.»</p>
+        <span class="quote-tag">О взгляде</span>
+      </div>
+      <div class="quote-card">
+        <p>«После каждого занятия я шла на обратную связь — и это автоматически меняло мой фокус.»</p>
+        <span class="quote-tag">О практике</span>
+      </div>
+      <div class="quote-card">
+        <p>«Я знаю, что с этим делать в работе. Это не просто теория.»</p>
+        <span class="quote-tag">О применимости</span>
+      </div>
+      <div class="quote-card">
+        <p>«Я начала видеть людей через призму Hogan, видеть то, что раньше не замечала.»</p>
+        <span class="quote-tag">О переменах</span>
+      </div>
+      <div class="quote-card">
+        <p>«Когда начинаешь практиковать — все по-другому становится. Спасибо, что помогаешь понять, обстучать версии, набить руку.»</p>
+        <span class="quote-tag">О процессе</span>
+      </div>
+      <div class="quote-featured">
+        <blockquote>«Обучался у Андрея в 2024 году работе с психометрическим инструментом — онлайн-курс длился три месяца. Это было одно из самых приятных и продуктивных обучений в моей жизни. Андрей умеет объяснять сложное просто. Часто использует метафоры, которые помогают легко понять и надолго запомнить материал. Создает пространство, где учиться не только эффективно, но и по-человечески тепло. Даже после трёхчасовой сессии остаётся подъём энергии.»</blockquote>
+        <div class="qf-meta">
+          <div class="qf-name">Павел Белобородов</div>
+          <div class="qf-role">Executive консультант</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
