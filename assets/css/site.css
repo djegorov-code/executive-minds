@@ -315,9 +315,8 @@ a.inline-link:hover { text-decoration-color: var(--ink); }
 .strip .strip-bg {
   position: absolute; inset: 0; z-index: -1;
   background-size: cover; background-position: center;
-  filter: brightness(0.45) saturate(0.85) blur(2px);
+  filter: brightness(0.62) saturate(0.85);
 }
-.strip .strip-bg::after { content:''; position:absolute; inset:0; background: transparent; }
 .strip-inner { max-width: var(--maxw); margin: 0 auto; }
 .strip-eyebrow { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber-soft); margin-bottom: 1rem; }
 .strip-title { font-family: var(--serif); font-size: clamp(1.7rem, 3.5vw, 2.75rem); line-height: 1.1; max-width: 22ch; margin-bottom: 1.1rem; }
