@@ -11,19 +11,20 @@
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C1F1A'/%3E%3Ctext x='50%25' y='62%25' text-anchor='middle' font-family='Georgia' fill='%23C9A065' font-size='22'%3EE%3C/text%3E%3C/svg%3E">
 <style>
-  .page-hero { background: var(--cream); padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--line); }
+  .page-hero { background: var(--forest); color: var(--cream); padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid rgba(255,255,255,0.06); }
   .page-hero .ph-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem,4vw,4rem); align-items: end; }
-  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 380; line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 1.25rem; }
-  .page-hero h1 em { font-style: italic; color: var(--moss); font-weight: 380; }
-  .page-hero p.lead { font-size: 1.1rem; max-width: 60ch; }
-  .page-hero .ph-side { padding-left: clamp(0rem, 2vw, 2rem); border-left: 1px solid var(--line-soft); }
-  .page-hero .ph-side strong { display: block; font-family: var(--serif); font-size: 1.1rem; color: var(--ink); font-weight: 440; }
-  .page-hero .ph-side span { display: block; font-size: 0.88rem; color: var(--ink-mute); margin-top: 0.25rem; }
-  .page-hero .ph-side .lab { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1rem; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 380; line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 1.25rem; color: var(--cream); }
+  .page-hero h1 em { font-style: italic; color: var(--amber-soft); font-weight: 380; }
+  .page-hero .eyebrow { color: var(--amber-soft); }
+  .page-hero p.lead { font-size: 1.1rem; max-width: 60ch; color: rgba(244,239,227,0.78); }
+  .page-hero .ph-side { padding-left: clamp(0rem, 2vw, 2rem); border-left: 1px solid rgba(255,255,255,0.1); }
+  .page-hero .ph-side strong { display: block; font-family: var(--serif); font-size: 1.1rem; color: var(--cream); font-weight: 440; }
+  .page-hero .ph-side span { display: block; font-size: 0.88rem; color: rgba(244,239,227,0.55); margin-top: 0.25rem; }
+  .page-hero .ph-side .lab { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber-soft); margin-bottom: 1rem; }
   .page-hero .ph-side ul { list-style: none; }
-  .page-hero .ph-side ul li { padding: 0.8rem 0; border-bottom: 1px solid var(--line-soft); }
+  .page-hero .ph-side ul li { padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
   .page-hero .ph-side ul li:last-child { border-bottom: 0; }
-  @media (max-width: 800px) { .page-hero .ph-grid { grid-template-columns: 1fr; } .page-hero .ph-side { border-left: 0; padding-left: 0; border-top: 1px solid var(--line-soft); padding-top: 1.5rem; } }
+  @media (max-width: 800px) { .page-hero .ph-grid { grid-template-columns: 1fr; } .page-hero .ph-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; } }
 
   /* Matrix table (same as space) */
   .matrix { width: 100%; border-collapse: collapse; font-family: var(--sans); }
@@ -83,8 +84,8 @@
         <h1 style="margin-top:1rem;">Форматы <em>Executive Minds</em>.</h1>
         <p class="lead">Executive Minds объединяет несколько форматов работы с Hogan: курс глубинной интерпретации, супервизорские группы, индивидуальные разборы и корпоративное обучение. Если вы не уверены, с чего начать, используйте матрицу ниже.</p>
         <div style="margin-top: 1.5rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
-          <a href="signup.html?context=picker" class="btn btn--outline btn--sm">Помогите выбрать формат</a>
-          <a href="#program-1" class="btn btn--ghost btn--sm">К курсу →</a>
+          <a href="signup.html?context=picker" class="btn btn--outline-light btn--sm">Помогите выбрать формат</a>
+          <a href="#program-1" class="btn btn--outline-light btn--sm" style="opacity:0.6;">К курсу →</a>
         </div>
       </div>
       <aside class="ph-side">
@@ -99,18 +100,6 @@
   </div>
 </section>
 
-<!-- Hogan marquee inline -->
-<section class="hogan-marquee hogan-marquee--inline" aria-hidden="true">
-  <div>
-    <div class="marquee-row marquee-row--slow">
-      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
-      <span class="pill pill--hds">EXC</span><span class="pill pill--hds">SKE</span><span class="pill pill--hds">CAU</span><span class="pill pill--hds">RES</span><span class="pill pill--hds">LEI</span><span class="pill pill--hds">BOL</span><span class="pill pill--hds">MIS</span><span class="pill pill--hds">COL</span><span class="pill pill--hds">IMG</span><span class="pill pill--hds">DIL</span><span class="pill pill--hds">DUT</span>
-      <span class="pill pill--mvpi">REC</span><span class="pill pill--mvpi">POW</span><span class="pill pill--mvpi">HED</span><span class="pill pill--mvpi">ALT</span><span class="pill pill--mvpi">AFF</span><span class="pill pill--mvpi">TRA</span><span class="pill pill--mvpi">SEC</span><span class="pill pill--mvpi">COM</span><span class="pill pill--mvpi">AES</span><span class="pill pill--mvpi">SCI</span>
-      <span class="pill pill--hpi">ADJ</span><span class="pill pill--hpi">AMB</span><span class="pill pill--hpi">SOC</span><span class="pill pill--hpi">IPS</span><span class="pill pill--hpi">PRU</span><span class="pill pill--hpi">INQ</span><span class="pill pill--hpi">LAP</span>
-      <span class="pill pill--hds">EXC</span><span class="pill pill--hds">SKE</span><span class="pill pill--hds">CAU</span><span class="pill pill--hds">RES</span><span class="pill pill--hds">LEI</span>
-    </div>
-  </div>
-</section>
 
 <!-- MATRIX -->
 <section class="section">
