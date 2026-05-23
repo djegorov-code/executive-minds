@@ -235,7 +235,8 @@
       var btn = form.querySelector('[type=submit]');
       btn.disabled = true;
       btn.textContent = 'Отправляем…';
-      fetch('https://formspree.io/f/REPLACE_WITH_YOUR_ID', {
+      /* ⚠️ FORMSPREE: зарегистрируйтесь на formspree.io, создайте форму и замените REPLACE_WITH_YOUR_FORMSPREE_ID */
+      fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID', {
         method: 'POST',
         body: new FormData(form),
         headers: { Accept: 'application/json' }

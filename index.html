@@ -208,6 +208,21 @@
   .trust-grid .t .lab { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
   @media (max-width: 700px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
 
+  /* Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); margin-top: 2.5rem; }
+  .tl-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line-soft); align-items: start; }
+  .tl-year { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); padding-top: 0.2rem; }
+  .tl-body strong { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; display: block; margin-bottom: 0.35rem; color: var(--ink); }
+  .tl-body p { font-size: 0.9rem; color: var(--ink-mute); line-height: 1.55; margin: 0; }
+  .tl-item--active { background: none; }
+  .tl-item--active .tl-year { color: var(--amber); font-weight: 600; }
+  .tl-item--active .tl-body strong { color: var(--moss); }
+  @media (max-width: 700px) { .tl-item { grid-template-columns: 1fr; gap: 0.35rem; } .tl-year { font-size: 0.72rem; } }
+
+  /* Certs in host */
+  .host-certs { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .host-certs img { height: 80px; width: auto; border-radius: 4px; object-fit: contain; border: 1px solid var(--line-soft); background: var(--paper); padding: 4px; }
+
   /* Testimonials */
   .quotes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
   .quote-card { background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
@@ -439,7 +454,29 @@
   <div class="wrap-narrow">
     <p class="eyebrow" style="margin-bottom:1.5rem;">Откуда взялся подход</p>
     <blockquote class="pull">Эта программа появилась как результат подготовки команды консультантов к выходу на проект. Не было времени объяснять с нуля, что значат шкалы.</blockquote>
-    <p style="font-size:1.05rem;line-height:1.72;color:var(--ink-soft);margin-top:1.5rem;">Вероятность ошибки интерпретации зависит от двух факторов. Благодаря этим ограничениям появился подход, который с тех пор подтверждается опытом клиентов и расчётами на более чем 1000 профилей.</p>
+    <p style="font-size:1.05rem;line-height:1.72;color:var(--ink-soft);margin-top:1.5rem;">Нужен был короткий рабочий путь от данных к выводам — без пересказа шкал и без потери глубины. Подход с тех пор подтверждается опытом клиентов и расчётами на более чем 1000 профилей.</p>
+  </div>
+</section>
+
+<!-- =================== PAST GROUPS TIMELINE =================== -->
+<section class="section" style="background:var(--cream-soft);border-block:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="kicker-row">
+        <span class="eyebrow">Предыдущие группы</span>
+        <span class="side-label">С 2023 года</span>
+      </div>
+      <h2>Пять групп прошли до этого.</h2>
+      <p class="lead">Каждая закрытая: 6–8 человек, реальные профили, работа с ведущим напрямую.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">2023 · Весна</div><div class="tl-body"><strong>Первая группа</strong><p>Базовая интерпретация: шкалы, подшкалы, нарратив за числами. Старт практики Executive Minds.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2023 · Осень</div><div class="tl-body"><strong>Вторая группа</strong><p>Углублённая работа с профилями рисков и лидерских потенциалов.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2024 · Весна</div><div class="tl-body"><strong>Третья группа</strong><p>Фокус на профилях C-level. Контекст: сделки, преемники, командная диагностика.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2024 · Осень</div><div class="tl-body"><strong>Четвёртая группа</strong><p>Нетипичные профили и сложные случаи. Участники из executive search и HR.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2025</div><div class="tl-body"><strong>Пятая группа</strong><p>Расширенная программа, больше времени на интерпретацию в парах и малых командах.</p></div></div>
+      <div class="tl-item tl-item--active"><div class="tl-year">2026 · Июнь</div><div class="tl-body"><strong>Шестая группа — открыта запись</strong><p>5 суббот · 25 часов практики · 6–8 человек</p><a href="signup.html?context=group" class="btn btn--outline btn--sm" style="margin-top:1rem;">Подать заявку →</a></div></div>
+    </div>
   </div>
 </section>
 
@@ -568,6 +605,11 @@
           <li>Оценка C-level и управленческих команд</li>
           <li>VI поток Executive Minds с 2023</li>
         </ul>
+        <div class="host-certs">
+          <img src="assets/img/cert-hogan-1.png" alt="Сертификат Hogan Advanced 2016">
+          <img src="assets/img/cert-hogan-2.png" alt="Сертификат Hogan Advanced 2019">
+          <img src="assets/img/cert-hogan-apac.jpeg" alt="Сертификация Hogan Assessment">
+        </div>
       </aside>
       <div class="host-body">
         <p>
